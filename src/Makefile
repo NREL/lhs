@@ -1,97 +1,115 @@
-PARMS.for
-KILLFILE.for
-FILELENG.for
-FLNAME.for
-DISTNM.for
-CPARAM.for
-CSAMP.for
-CWORKC.for
-CWORKX.for
-CRANK.for
-CCMATR.for
-MISCMOD.for
-banner.for 
-beta.for 
-betafn.for 
-betaic.for 
-betaln.for 
-binom.for
-chkdat.for
-chkdim.for
-chkemp.for
-chkstr.for 
-chkzro.for
-chlsky.for
-cmcrd.for
-corcal.for
-corout.for 
-cumulc.for
-cumuld.for
-datout.for
-datsqz.for
-dmfsd.for 
-dsinv.for
-entrpf.for
-entrpy.for
-errchk.for
-errget.for 
-erstgt.for
-erxset.for
-expon.for
-factor.for
-factr2.for 
-fileoc.for
-findit.for
-finvnor.for
-gamma.for
-gammab.for 
-gammam.for
-geom.for
-hgeom.for
-histo.for
-hpsrt.for 
-hstout.for
-hypgeo.for
-igaus.for
-igaus1.for
-igausf.for 
-imtql2.for
-interp.for
-intrpd.for
-lhs.for
-lhsdrv.for 
-ljust.for
-lread.for
-matinv.for
-mix.for
-nbinom.for 
-newcrd.for
-normal.for
-outcrd.for
-outdat.for
-pareto.for 
-pmtrx.for
-poison.for
-posdef.for
-ranker.for
-rdpar.for 
-rdpar2.for
-read.for
-rierfc1.for
-rmcnp.for
-rmcnpi.for 
-rnum1.for
-samout.for
-setdef.for
-sift.for
-sspev.for 
-table.for
-tqlrat.for
-trbak3.for
-tred3.for
-triang.for 
-unifrm.for
-vif.for
-weibul.for
-wrtcrd.for
-wrtpar.for 
+CFLAGS=-ftrapuv -zero -save -D__INTEL_COMPILER -traceback -check all -O2
+TARGET=lhsmac.exe
+OBJ=\
+	KILLFILE.o\
+	Parms.o\
+	Cparam.o\
+	CSAMP.o\
+	CWORKX.o\
+	CWORKC.o\
+	MISCMOD.o\
+	CRANK.o\
+	BETAFN.o\
+	BETAIC.o\
+	BETALN.o\
+	Banner.o\
+	Beta.o\
+	Binom.o\
+	CCMATR.o\
+	CHLSKY.o\
+	CORCAL.o\
+	COROUT.o\
+	Chkdat.o\
+	Chkdim.o\
+	Chkemp.o\
+	Chkstr.o\
+	Chkzro.o\
+	Cmcrd.o\
+	Cumulc.o\
+	Cumuld.o\
+	DATOUT.o\
+	DISTNM.o\
+	DMFSD.o\
+	DSINV.o\
+	Datsqz.o\
+	ENTRPF.o\
+	ERRGET.o\
+	ERSTGT.o\
+	ERXSET.o\
+	Entrpy.o\
+	Errchk.o\
+	Expon.o\
+	FACTOR.o\
+	FACTR2.o\
+	FILELENG.o\
+	FILEOC.o\
+	FINDIT.o\
+	FINVNOR.o\
+	FLNAME.o\
+	GAMMAB.o\
+	Gamma.o\
+	Gammam.o\
+	Geom.o\
+	HISTO.o\
+	HPSRT.o\
+	HSTOUT.o\
+	HYPGEO.o\
+	Hgeom.o\
+	IGAUS1.o\
+	IGAUSF.o\
+	IMTQL2.o\
+	INTERP.o\
+	INTRPD.o\
+	Igaus.o\
+	LJUST.o\
+	Lhs.o\
+	Lhsdrv.o\
+	Lread.o\
+	MATINV.o\
+	MIX.o\
+	Makefile\
+	Nbinom.o\
+	Newcrd.o\
+	Normal.o\
+	OUTDAT.o\
+	Outcrd.o\
+	PMTRX.o\
+	Pareto.o\
+	Poison.o\
+	Posdef.o\
+	RANKER.o\
+	RIERFC1.o\
+	RMCNP.o\
+	RMCNPI.o\
+	RNUM1.o\
+	Rdpar.o\
+	Rdpar2.o\
+	Read.o\
+	SETDEF.o\
+	SIFT.o\
+	Samout.o\
+	Sspev.o\
+	TQLRAT.o\
+	TRBAK3.o\
+	TRED3.o\
+	Table.o\
+	Triang.o\
+	UNIFRM.o\
+	VIF.o\
+	WRTCRD.o\
+	Weibul.o\
+	Wrtpar.o
+
+%.o : %.for
+	ifort $(CFLAGS) -fixed -c $<
+
+%.o : %.FOR
+	ifort $(CFLAGS) -fixed -c $<
+
+$(TARGET) : $(OBJ)
+	ifort -o $@ $^
+	cp $@ ../../SVNWORK/samexe/macbuild/SAM.app/Contents/MacOS/exelib/tools
+
+clean:
+	rm -f *.o $(TARGET) *.mod
+
