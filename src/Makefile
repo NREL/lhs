@@ -108,7 +108,7 @@ OBJ=\
 
 $(TARGET) : $(OBJ)
 	ifort -o $@ $^
-	cp $@ ../../SVNWORK/samexe/macbuild/SAM.app/Contents/MacOS/exelib/tools
+	cp $@ ../../SAMwx/samexe/macbuild/SAM.app/Contents/MacOS/exelib/tools
 
 clean:
 	rm -f *.o $(TARGET) *.mod
