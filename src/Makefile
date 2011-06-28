@@ -1,4 +1,5 @@
 CFLAGS=-ftrapuv -zero -save -D__INTEL_COMPILER -traceback -check all -O2
+IVFC=ifort-ia32
 TARGET=lhsmac.exe
 OBJ=\
 	KILLFILE.o\
@@ -101,13 +102,13 @@ OBJ=\
 	Wrtpar.o
 
 %.o : %.for
-	ifort $(CFLAGS) -fixed -c $<
+	$(IVFC) $(CFLAGS) -fixed -c $<
 
 %.o : %.FOR
-	ifort $(CFLAGS) -fixed -c $<
+	$(IVFC) $(CFLAGS) -fixed -c $<
 
 $(TARGET) : $(OBJ)
-	ifort -o $@ $^
+	$(IVFC) -o $@ $^
 	cp $@ ../../SAMwx/samexe/macbuild/SAM.app/Contents/MacOS/exelib/tools
 
 clean:
