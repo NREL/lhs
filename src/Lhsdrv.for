@@ -96,7 +96,7 @@ c
 c     Call GetCL(CmdLin)
 
 !dec$ if defined (__CVF66__)
-	USE DFLIB
+c	USE DFLIB
 !dec$ endif
 
       call GETARG(1,CmdLin)

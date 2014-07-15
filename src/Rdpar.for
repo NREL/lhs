@@ -280,8 +280,9 @@ C
 c
 c     -- Open the output files
       OPEN(UNIT=1, FILE=SamFil)
-      OPEN(UNIT=6, FILE=MesFil, FORM='FORMATTED',
-     1     CARRIAGE CONTROL='FORTRAN')
+      OPEN(UNIT=6, FILE=MesFil)
+c      OPEN(UNIT=6, FILE=MesFil, FORM='FORMATTED',
+c     1     CARRIAGE CONTROL='FORTRAN')
 c
       CALL CHKZRO(N,NV,IRSET)
       If(KLLERR) Return

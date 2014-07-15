@@ -222,8 +222,9 @@ c           -- set the name of the message (program output) file
             MFile = Card(8:)
             Call LJust(MFile)
             If(KLLERR) Return
-            Open(6, File=MFile, Form='FORMATTED',
-     1            Carriage Control='FORTRAN')
+             Open(6, File=MFile)
+c            Open(6, File=MFile, Form='FORMATTED',
+c     1            Carriage Control='FORTRAN')
 c
          Else If ( Card(1:8) == 'PRETRIN ' ) Then
 c           -- set the name of the ETPRE/EVNTRE tree input file from

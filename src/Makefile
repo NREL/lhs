@@ -1,6 +1,6 @@
-CFLAGS=-ftrapuv -zero -save -D__INTEL_COMPILER -traceback -check all -O2
-IVFC=ifort-ia32
-TARGET=lhsmac.exe
+CFLAGS=-O2
+IVFC=gfortran
+TARGET=lhs.bin
 OBJ=\
 	KILLFILE.o\
 	Parms.o\
@@ -68,7 +68,6 @@ OBJ=\
 	Lread.o\
 	MATINV.o\
 	MIX.o\
-	Makefile\
 	Nbinom.o\
 	Newcrd.o\
 	Normal.o\
@@ -102,14 +101,13 @@ OBJ=\
 	Wrtpar.o
 
 %.o : %.for
-	$(IVFC) $(CFLAGS) -fixed -c $<
+	$(IVFC) $(CFLAGS) -c $<
 
 %.o : %.FOR
-	$(IVFC) $(CFLAGS) -fixed -c $<
+	$(IVFC) $(CFLAGS) -c $<
 
 $(TARGET) : $(OBJ)
 	$(IVFC) -o $@ $^
-	cp $@ ../../SAMwx/samexe/macbuild/SAM.app/Contents/MacOS/exelib/tools
 
 clean:
 	rm -f *.o $(TARGET) *.mod
