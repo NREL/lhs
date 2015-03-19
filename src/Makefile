@@ -1,4 +1,5 @@
 CFLAGS=-O2
+LFLAGS=-static-libgfortran -o
 IVFC=gfortran
 TARGET=lhs.bin
 OBJ=\
@@ -100,6 +101,9 @@ OBJ=\
 	Weibul.o\
 	Wrtpar.o
 
+%.o : %.F
+	$(IVFC) $(CFLAGS) -c $<
+
 %.o : %.for
 	$(IVFC) $(CFLAGS) -c $<
 
@@ -107,7 +111,11 @@ OBJ=\
 	$(IVFC) $(CFLAGS) -c $<
 
 $(TARGET) : $(OBJ)
-	$(IVFC) -o $@ $^
+	$(IVFC) $(LFLAGS) $@ $^
+
+copy:
+	cp $(TARGET) ../../SAMnt/osx_wx3
+	cp $(TARGET) ../../SAMnt/osx_wx3/SAM.app/Contents/runtime/bin
 
 clean:
 	rm -f *.o $(TARGET) *.mod
