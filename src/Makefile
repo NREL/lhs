@@ -113,9 +113,13 @@ OBJ=\
 $(TARGET) : $(OBJ)
 	$(IVFC) $(LFLAGS) $@ $^
 
-copy:
+copy_trunk:
 	cp $(TARGET) ../../SAMnt/osx_wx3
 	cp $(TARGET) ../../SAMnt/osx_wx3/SAM.app/Contents/runtime/bin
+
+copy_2015.1.30:
+	cp $(TARGET) ../../../2015.1.30/SAMnt/osx_wx3
+	cp $(TARGET) ../../../2015.1.30/SAMnt/osx_wx3/SAM.app/Contents/runtime/bin
 
 clean:
 	rm -f *.o $(TARGET) *.mod
