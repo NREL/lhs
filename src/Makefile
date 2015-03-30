@@ -1,5 +1,5 @@
 CFLAGS=-O2
-LFLAGS=-static-libgfortran -o
+LFLAGS=-static-libgfortran -static-libgcc -static-libstdc++ -o
 IVFC=gfortran
 # Because %SystemRoot% is the path to the windows directory is should be set on all Windows computers but not on Linux/MacOS
 ifdef SystemRoot
