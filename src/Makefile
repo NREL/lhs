@@ -9,7 +9,7 @@ ifdef SystemRoot
 	CP_BR_1=..\..\..\2015.1.30\SAMnt\deploy\runtime\bin
 	CP_BR_2=..\..\..\2015.1.30\SAMnt\deploy\runtime\bin
 	CP=copy
-	RM=del /q
+	RM=cmd //C DEL //Q
 else
 	TARGET=lhs.bin
 	CP_TR_1=../../SAMnt/osx_wx3
