@@ -4,18 +4,18 @@ IVFC=gfortran
 # Because %SystemRoot% is the path to the windows directory is should be set on all Windows computers but not on Linux/MacOS
 ifdef SystemRoot
 	TARGET=lhs.exe
-	CP_TR_1=..\..\SAMnt\deploy\runtime\bin
-	CP_TR_2=..\..\SAMnt\deploy\runtime\bin
-	CP_BR_1=..\..\..\2015.1.30\SAMnt\deploy\runtime\bin
-	CP_BR_2=..\..\..\2015.1.30\SAMnt\deploy\runtime\bin
+	CP_TR_1=..\..\SAM\Sandia\windows
 	CP=copy
 	RM=cmd //C DEL //Q
 else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+		CP_TR_1=../../SAM/Sandia/linux
+    endif
+    ifeq ($(UNAME_S),Darwin)
+		CP_TR_1=../../SAM/Sandia/osx
+    endif
 	TARGET=lhs.bin
-	CP_TR_1=../../SAMnt/osx_wx3
-	CP_TR_2=../../SAMnt/osx_wx3/SAM.app/Contents/runtime/bin
-	CP_BR_1=../../../2015.1.30/SAMnt/osx_wx3
-	CP_BR_2=../../../2015.1.30/SAMnt/osx_wx3/SAM.app/Contents/runtime/bin
 	CP=cp
 	RM=rm -f
 endif
@@ -127,16 +127,12 @@ OBJ=\
 %.o : %.FOR
 	$(IVFC) $(CFLAGS) -c $<
 
-$(TARGET) : $(OBJ)
+$(TARGET) : $(OBJ) 
 	$(IVFC) $(LFLAGS) $@ $^
+	$(MAKE) copy
 
-copy_trunk:
+copy:
 	$(CP) $(TARGET) $(CP_TR_1)
-	$(CP) $(TARGET) $(CP_TR_2)
-
-copy_branch:
-	$(CP) $(TARGET) $(CP_BR_1)
-	$(CP) $(TARGET) $(CP_BR_2)
 
 clean:
 	$(RM) *.o $(TARGET) *.mod
