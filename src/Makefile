@@ -5,7 +5,7 @@ IVFC=gfortran
 ifdef SystemRoot
 	TARGET=lhs.exe
 	CP_TR_1=..\..\SAM\Sandia\windows
-	CP=copy
+	CP=cp
 	RM=cmd //C DEL //Q
 else
     UNAME_S := $(shell uname -s)
@@ -129,9 +129,6 @@ OBJ=\
 
 $(TARGET) : $(OBJ) 
 	$(IVFC) $(LFLAGS) $@ $^
-	$(MAKE) copy
-
-copy:
 	$(CP) $(TARGET) $(CP_TR_1)
 
 clean:
