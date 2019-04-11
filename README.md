@@ -1,5 +1,5 @@
 # About
-LHS is one library of Sandia National Laboratory's Dakota package. LHS is licensed as [LGPL-2.1-or-laterl(https://dakota.sandia.gov/content/packages/lhs)
+LHS is one library of Sandia National Laboratory's Dakota package. LHS is licensed as [LGPL-2.1-or-later](https://dakota.sandia.gov/content/packages/lhs)
 
 ## To build lhs on Windows:
 1. download mingw at http://www.mingw.org/wiki/Getting_Started
