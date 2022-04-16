@@ -1,136 +1,15 @@
-CFLAGS=-O2
-LFLAGS=-static-libgfortran -static-libgcc -static-libstdc++ -o
-IVFC=gfortran
-# Because %SystemRoot% is the path to the windows directory is should be set on all Windows computers but not on Linux/MacOS
-ifdef SystemRoot
-	TARGET=lhs.exe
-	CP_TR_1=..\..\SAM\Sandia\windows
-	CP=cp
-	RM=cmd //C DEL //Q
-else
-    UNAME_S := $(shell uname -s)
-    ifeq ($(UNAME_S),Linux)
-		CP_TR_1=../../SAM/Sandia/linux
-    endif
-    ifeq ($(UNAME_S),Darwin)
-		CP_TR_1=../../SAM/Sandia/osx
-    endif
-	TARGET=lhs.bin
-	CP=cp
-	RM=rm -f
-endif
-OBJ=\
-	KILLFILE.o\
-	Parms.o\
-	Cparam.o\
-	CSAMP.o\
-	CWORKX.o\
-	CWORKC.o\
-	MISCMOD.o\
-	CRANK.o\
-	BETAFN.o\
-	BETAIC.o\
-	BETALN.o\
-	Banner.o\
-	Beta.o\
-	Binom.o\
-	CCMATR.o\
-	CHLSKY.o\
-	CORCAL.o\
-	COROUT.o\
-	Chkdat.o\
-	Chkdim.o\
-	Chkemp.o\
-	Chkstr.o\
-	Chkzro.o\
-	Cmcrd.o\
-	Cumulc.o\
-	Cumuld.o\
-	DATOUT.o\
-	DISTNM.o\
-	DMFSD.o\
-	DSINV.o\
-	Datsqz.o\
-	ENTRPF.o\
-	ERRGET.o\
-	ERSTGT.o\
-	ERXSET.o\
-	Entrpy.o\
-	Errchk.o\
-	Expon.o\
-	FACTOR.o\
-	FACTR2.o\
-	FILELENG.o\
-	FILEOC.o\
-	FINDIT.o\
-	FINVNOR.o\
-	FLNAME.o\
-	GAMMAB.o\
-	Gamma.o\
-	Gammam.o\
-	Geom.o\
-	HISTO.o\
-	HPSRT.o\
-	HSTOUT.o\
-	HYPGEO.o\
-	Hgeom.o\
-	IGAUS1.o\
-	IGAUSF.o\
-	IMTQL2.o\
-	INTERP.o\
-	INTRPD.o\
-	Igaus.o\
-	LJUST.o\
-	Lhs.o\
-	Lhsdrv.o\
-	Lread.o\
-	MATINV.o\
-	MIX.o\
-	Nbinom.o\
-	Newcrd.o\
-	Normal.o\
-	OUTDAT.o\
-	Outcrd.o\
-	PMTRX.o\
-	Pareto.o\
-	Poison.o\
-	Posdef.o\
-	RANKER.o\
-	RIERFC1.o\
-	RMCNP.o\
-	RMCNPI.o\
-	RNUM1.o\
-	Rdpar.o\
-	Rdpar2.o\
-	Read.o\
-	SETDEF.o\
-	SIFT.o\
-	Samout.o\
-	Sspev.o\
-	TQLRAT.o\
-	TRBAK3.o\
-	TRED3.o\
-	Table.o\
-	Triang.o\
-	UNIFRM.o\
-	VIF.o\
-	WRTCRD.o\
-	Weibul.o\
-	Wrtpar.o
+#${ARCH}  is either x86_64 or arm64 to build universal binary from Makefile
 
-%.o : %.F
-	$(IVFC) $(CFLAGS) -c $<
-
-%.o : %.for
-	$(IVFC) $(CFLAGS) -c $<
-
-%.o : %.FOR
-	$(IVFC) $(CFLAGS) -c $<
-
-$(TARGET) : $(OBJ) 
-	$(IVFC) $(LFLAGS) $@ $^
-	$(CP) $(TARGET) $(CP_TR_1)
+all:
+	 make -f Makefile-lhs ARCH=arm64
+	 rm *.mod
+	 rm *.o
+	 make -f Makefile-lhs ARCH=x86_64
+	 rm *.mod
+	 rm *.o
+	 lipo -create -output lhs.bin lhs_x86_64.bin lhs_arm64.bin
+	 cp lhs.bin ../../SAM/Sandia/osx
 
 clean:
-	$(RM) *.o $(TARGET) *.mod
+	$(RM) *.o *.bin *.mod
 

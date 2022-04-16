@@ -4,3 +4,7 @@
 *.mod
 
 *.bin
+
+src/LHS.ERR
+
+src/fort.5
