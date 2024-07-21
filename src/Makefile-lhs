@@ -1,6 +1,6 @@
 #${ARCH}  is either x86_64 or arm64 to build universal binary from Makefile
 
-CFLAGS=-O2  
+CFLAGS=-O2 -mmacosx-version-min=12  
 LFLAGS= -static-libgfortran -static-libgcc -static-libstdc++ -o
 IVFC=gfortran_${ARCH} 
 # Because %SystemRoot% is the path to the windows directory is should be set on all Windows computers but not on Linux/MacOS
